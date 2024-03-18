@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const produtos = [];{
+
+            function addProduto() {
+            const nome = prompt("Digite o nome do produto: ");
+            const preco = parseFloat(prompt("Digite o preço do produto: "));
+            const descricao = prompt("Digite a descrição do produto: ");
+
+            const produto = {
+            nome,
+            preco,
+            descricao,
+            };
+
+            produtos.push(produto);
+
+            alert("Produto adicionado com sucesso!");
+            }
+
+            function buscarOproduto() {
+                const nome = prompt("Digite o nome do produto que deseja buscar:");
+
+                if (produtos.length === 0) {
+                    alert("O catálogo está vazio!");
+                    return;
+                }
+
+                const prodEncontrado = produtos.find((produto) => produto.nome === nome);
+
+                if (prodEncontrado) {
+                    alert(`Produto encontrado:\n\nNome: ${prodEncontrado.nome}\nPreço: R$ ${prodEncontrado.preco}\nDescrição: ${prodEncontrado.descricao}`);
+                } else {
+                    alert("Produto não encontrado!");
+                }
+            }
+
+
+            function atualizarProduto() {
+            const nome = prompt("Digite o nome do produto que deseja atualizar:");
+
+            const prodEncontrado = produtos.find((produto) => produto.nome === nome);
+
+            if (prodEncontrado) {
+            const novoNome = prompt("Digite o novo nome do produto:")
+            const novoPreco = parseFloat(prompt("Digite o novo preço do produto:"));
+            const novaDescricao = prompt("Digite a nova descrição do produto:");
+
+            prodEncontrado.nome = novoNome;
+            prodEncontrado.preco = novoPreco;
+            prodEncontrado.descricao = novaDescricao;
+
+            alert("Produto atualizado com sucesso!");
+            } else {
+                alert("Produto não encontrado!");
+            }
+            }
+
+            function VisualizarTodos() {
+            if (produtos.length === 0) {
+            alert("O catálogo está vazio!");
+            return;
+            }
+
+            let mensagem = "Lista de produtos:\n\n";
+
+            for (const produto of produtos) {
+            mensagem += `Nome: ${produto.nome}\nPreço: R$ ${produto.preco}\nDescrição: ${produto.descricao}\n\n`;
+            }
+
+            alert(mensagem);
+            }
+
+            function removeProduto() {
+            const nome = prompt("Digite o nome do produto que deseja remover:");
+
+            const removeProduto = produtos.findIndex((produto) => produto.nome === nome);
+
+            if (removeProduto !== -1) {
+            produtos.splice(removeProduto, 1);
+
+            alert("Produto removido com sucesso!");
+            } else {
+            alert("Produto não encontrado!");
+            }
+            }
+
+            while (true) {
+            const opcao = prompt(`
+            Escolha uma opção:
+
+            1. Adicionar produto
+            2. Buscar produto
+            3. Atualizar produto
+            4. Visualizar todos os produtos
+            5. Remover produto
+            6. Sair
+
+            Digite o número da opção desejada:
+            `);
+
+            switch (opcao) {
+                case "1":
+                    addProduto();
+                    break;
+                case "2":
+                    buscarOproduto();
+                    break;
+                case "3":
+                    atualizarProduto();
+                    break;
+                case "4":
+                    VisualizarTodos();
+                    break;
+                case "5":
+                    removeProduto();
+                    break;
+                case "6":
+                    alert("Obrigado por usar o catálogo de produtos!");
+                    break;
+                default:
+                    alert("Opção inválida!");
+                }
+
+                if (opcao === "6") {
+                    break;
+            }
+            }
+        }
+    </script>
+</body>
+</html>
